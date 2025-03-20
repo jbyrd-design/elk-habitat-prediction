@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map | Elk Habitat Prediction System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/master-styles.css">
+    <style>
+        .map-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+        
+        .map-controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Elk Habitat Prediction</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="methodology.html">Methodology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="results.html">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="interactive-map.html">Interactive Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="research-paper.html">Research Paper</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="map-header">
+        <div class="container">
+            <h1 class="animate-on-scroll">Interactive Map</h1>
+            <p class="lead animate-on-scroll">Explore elk habitat suitability across Colorado Game Management Units</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="map-controls animate-on-scroll">
+                        <h4>Map Controls</h4>
+                        <div class="mb-3">
+                            <label for="gmuSelect" class="form-label">Game Management Unit</label>
+                            <select class="form-select" id="gmuSelect">
+                                <option value="all">All GMUs</option>
+                                <option value="12">GMU 12 - Bears Ears</option>
+                                <option value="23">GMU 23 - Rabbit Ears</option>
+                                <option value="24">GMU 24 - Gore Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Layer Visibility</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="habitatLayer" checked>
+                                <label class="form-check-label" for="habitatLayer">
+                                    Habitat Suitability
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="probabilityLayer">
+                                <label class="form-check-label" for="probabilityLayer">
+                                    High Suitability Probability
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="roadsLayer" checked>
+                                <label class="form-check-label" for="roadsLayer">
+                                    Roads & Trails
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="waterLayer" checked>
+                                <label class="form-check-label" for="waterLayer">
+                                    Water Features
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="landOwnershipLayer">
+                                <label class="form-check-label" for="landOwnershipLayer">
+                                    Land Ownership
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Base Map</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="baseMap" id="terrainMap" checked>
+                                <label class="form-check-label" for="terrainMap">
+                                    Terrain
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="baseMap" id="satelliteMap">
+                                <label class="form-check-label" for="satelliteMap">
+                                    Satellite
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="baseMap" id="topoMap">
+                                <label class="form-check-label" for="topoMap">
+                                    Topographic
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary w-100" id="resetMapBtn">Reset Map</button>
+                    </div>
+                    
+                    <div class="legend animate-on-scroll mt-4">
+                        <h5>Legend</h5>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #1a9641;"></div>
+                            <span>High Suitability</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #ffffbf;"></div>
+                            <span>Medium Suitability</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #d7191c;"></div>
+                            <span>Low Suitability</span>
+                        </div>
+                        <hr>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #0571b0;"></div>
+                            <span>Water Features</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #404040;"></div>
+                            <span>Roads & Trails</span>
+                        </div>
+                        <hr>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #8dd3c7;"></div>
+                            <span>Public Land</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #ffffb3;"></div>
+                            <span>Private Land</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <div class="map-container animate-on-scroll" id="mapCanvas">
+                        <!-- Interactive map will be rendered here -->
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Location Information</h5>
+                            <div id="locationInfo">
+                                <p>Click on the map to see detailed information about a specific location.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">How to Use This Map</h5>
+                            <p>This interactive map allows you to explore elk habitat suitability across Colorado Game Management Units (GMUs) 12, 23, and 24. Here's how to use it:</p>
+                            <ul>
+                                <li><strong>Pan and Zoom:</strong> Click and drag to move the map, use the scroll wheel to zoom in and out.</li>
+                                <li><strong>Select GMU:</strong> Use the dropdown menu to focus on a specific Game Management Unit.</li>
+                                <li><strong>Toggle Layers:</strong> Show or hide different map layers using the checkboxes.</li>
+                                <li><strong>Change Base Map:</strong> Switch between terrain, satellite, and topographic views.</li>
+                                <li><strong>Get Location Info:</strong> Click anywhere on the map to see detailed habitat information for that specific location.</li>
+                                <li><strong>Reset View:</strong> Click the "Reset Map" button to return to the default view.</li>
+                            </ul>
+                            <p>The habitat suitability classification is based on our Random Forest model, which achieved 97.1% accuracy in predicting optimal elk habitats based on terrain, vegetation, and other environmental factors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4 text-center animate-on-scroll">Map Insights</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Terrain Patterns</h5>
+                            <p class="card-text">The interactive map reveals clear patterns in how terrain influences elk habitat suitability. High suitability areas are predominantly found on moderate slopes (10-30°) at mid-elevations, while steep slopes and very high elevations typically show low suitability.</p>
+                            <p class="card-text">Notice how ridgelines and valley bottoms often show different suitability classifications, reflecting elk's preference for specific topographic positions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Vegetation Influence</h5>
+                            <p class="card-text">Vegetation density strongly influences habitat suitability, with high NDVI values (indicating dense vegetation) generally corresponding to higher suitability areas. The satellite base map option allows you to visually compare vegetation patterns with habitat classifications.</p>
+                            <p class="card-text">Edge habitats, where forests meet meadows, frequently show high suitability, reflecting elk's preference for areas offering both forage and cover.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Human Impact</h5>
+                            <p class="card-text">The roads and trails layer reveals how human access influences habitat suitability. Areas close to roads typically show lower suitability, with the effect diminishing as distance increases.</p>
+                            <p class="card-text">Land ownership patterns also influence habitat quality, with some public lands showing higher suitability due to different management practices and reduced human disturbance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4 animate-on-scroll">Download Map Data</h2>
+            <p class="lead mb-4 animate-on-scroll">Want to use this data in your own GIS software?</p>
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-3">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">GeoTIFF Format</h5>
+                            <p class="card-text">Download habitat suitability rasters in GeoTIFF format, compatible with most GIS software.</p>
+                            <a href="#" class="btn btn-primary">Download GeoTIFF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Shapefile Format</h5>
+                            <p class="card-text">Download vector data including GMU boundaries, roads, and water features as shapefiles.</p>
+                            <a href="#" class="btn btn-primary">Download Shapefile</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">CSV Data</h5>
+                            <p class="card-text">Download tabular data with habitat suitability scores and environmental variables.</p>
+                            <a href="#" class="btn btn-primary">Download CSV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white">
+        <div class="container text-center">
+            <p>Elk Habitat Prediction System &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/image-generator.js"></script>
+    <!-- Changed from map-fix.js to map-fix-complete.js -->
+    <script src="js/map-fix-complete.js"></script>
+    <script src="js/site-integration.js"></script>
+</body>
+</html>

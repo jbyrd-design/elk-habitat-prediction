@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology | Elk Habitat Prediction System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/master-styles.css">
+    <style>
+        .methodology-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Elk Habitat Prediction</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="methodology.html">Methodology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="results.html">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="interactive-map.html">Interactive Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="research-paper.html">Research Paper</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="methodology-header">
+        <div class="container">
+            <h1 class="animate-on-scroll">Methodology</h1>
+            <p class="lead animate-on-scroll">How we built the Elk Habitat Prediction System</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="animate-on-scroll">Data Sources</h2>
+                    <p class="animate-on-scroll">Our prediction system integrates multiple geospatial datasets to create a comprehensive feature set for machine learning:</p>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Digital Elevation Models (DEMs)</h5>
+                            <p class="card-text">From the U.S. Geological Survey, providing base elevation data at 30-meter resolution. These models form the foundation for all terrain-based analyses, including slope, aspect, and ruggedness calculations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Sentinel-2 Satellite Imagery</h5>
+                            <p class="card-text">From the European Space Agency, offering multispectral data with 10-20 meter resolution, acquired during the fall hunting season. These images provide critical information about vegetation density, moisture content, and land cover types.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Colorado Parks & Wildlife Elk Harvest Statistics</h5>
+                            <p class="card-text">For GMUs 12, 23, and 24, providing historical success rates by location. This data helps calibrate our model with actual hunting outcomes and validate predictions against real-world results.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">OpenStreetMap Road and Trail Networks</h5>
+                            <p class="card-text">Representing potential access points and disturbance factors. Road proximity is a critical factor in elk habitat selection, as these animals often avoid areas with high human activity.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">National Hydrography Dataset</h5>
+                            <p class="card-text">Water features, including streams, rivers, and water bodies. Proximity to water is an essential component of elk habitat, as these animals require regular access to drinking sources.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Land Ownership Boundaries</h5>
+                            <p class="card-text">To distinguish between public and private hunting areas. This information is crucial for hunters to identify accessible locations and for wildlife managers to implement appropriate conservation strategies.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Preprocessing</h5>
+                            <p>All spatial datasets underwent rigorous preprocessing to ensure consistency and compatibility:</p>
+                            <ul>
+                                <li>Standardization to a common coordinate reference system (NAD83 / UTM Zone 13N)</li>
+                                <li>Resampling of all raster datasets to a uniform 30-meter resolution</li>
+                                <li>Clipping to the study area boundaries (GMUs 12, 23, and 24)</li>
+                                <li>Filling of missing data using appropriate interpolation methods</li>
+                                <li>Normalization of numerical values to appropriate scales</li>
+                                <li>Conversion of vector data to raster format for machine learning compatibility</li>
+                            </ul>
+                            <canvas id="preprocessingDiagram" width="300" height="200" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4 animate-on-scroll">Feature Engineering</h2>
+            <p class="mb-4 animate-on-scroll">Feature engineering played a critical role in transforming raw geospatial data into meaningful predictors for the machine learning model. For each 30-meter pixel in the study area, we derived the following features:</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Terrain Features</h3>
+                            <ul>
+                                <li><strong>Elevation categories:</strong> Classified by quintile to capture elevation preferences</li>
+                                <li><strong>Slope classes:</strong> Flat (0-10°), moderate (10-30°), steep (>30°)</li>
+                                <li><strong>Aspect categories:</strong> N, NE, E, SE, S, SW, W, NW to account for sun exposure and snow melt patterns</li>
+                                <li><strong>Terrain ruggedness index:</strong> Measuring the heterogeneity of the landscape</li>
+                            </ul>
+                            <canvas id="terrainFeaturesCanvas" width="400" height="200" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Vegetation Features</h3>
+                            <ul>
+                                <li><strong>NDVI values:</strong> Continuous measure of vegetation density derived from satellite imagery</li>
+                                <li><strong>Vegetation density classes:</strong> Low, medium, high based on NDVI thresholds calibrated to the study area</li>
+                                <li><strong>Edge proximity:</strong> Distance to forest/open boundary, capturing elk's preference for edge habitats</li>
+                            </ul>
+                            <canvas id="vegetationFeaturesCanvas" width="400" height="200" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Distance Features</h3>
+                            <ul>
+                                <li><strong>Distance to nearest water source:</strong> Calculated as Euclidean distance in meters</li>
+                                <li><strong>Distance to nearest road/trail:</strong> Measuring potential human disturbance</li>
+                                <li><strong>Distance to nearest access point:</strong> Identifying areas accessible to hunters</li>
+                            </ul>
+                            <canvas id="distanceFeaturesCanvas" width="400" height="200" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Historical Features</h3>
+                            <ul>
+                                <li><strong>Harvest success rate:</strong> Historical elk harvest success for each GMU</li>
+                                <li><strong>Hunter density:</strong> Estimated number of hunters per square kilometer</li>
+                                <li><strong>Seasonal patterns:</strong> Temporal variations in elk sightings and harvests</li>
+                            </ul>
+                            <canvas id="historicalFeaturesCanvas" width="400" height="200" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="animate-on-scroll">Machine Learning Model</h2>
+                    <p class="animate-on-scroll">We selected the Random Forest Classifier as our primary machine learning algorithm due to its well-documented performance in ecological applications, ability to handle mixed data types, resistance to overfitting, and built-in feature importance metrics.</p>
+                    
+                    <h4 class="mt-4 animate-on-scroll">Model Parameters</h4>
+                    <ul class="animate-on-scroll">
+                        <li><strong>Number of trees (n_estimators):</strong> 100</li>
+                        <li><strong>Split criterion:</strong> Gini impurity</li>
+                        <li><strong>Maximum depth:</strong> None (nodes expanded until all leaves are pure)</li>
+                        <li><strong>Minimum samples for split:</strong> 2</li>
+                        <li><strong>Minimum samples per leaf:</strong> 1</li>
+                        <li><strong>Maximum features considered per split:</strong> sqrt(n_features)</li>
+                        <li><strong>Bootstrap sampling:</strong> True</li>
+                    </ul>
+                    
+                    <h4 class="mt-4 animate-on-scroll">Training Approach</h4>
+                    <p class="animate-on-scroll">The dataset was split into training (70%) and testing (30%) sets, with stratification to ensure balanced representation of habitat suitability classes. The model was trained to predict three habitat suitability classes: High, Medium, and Low.</p>
+                    
+                    <p class="animate-on-scroll">We employed 5-fold cross-validation to ensure the robustness of our results and to prevent overfitting. This approach provides a more reliable estimate of model performance by testing on multiple different subsets of the data.</p>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Model Evaluation</h3>
+                            <p>Model evaluation employed multiple metrics including:</p>
+                            <ul>
+                                <li><strong>Accuracy:</strong> 97.1%</li>
+                                <li><strong>Precision:</strong> 0.97 (weighted average)</li>
+                                <li><strong>Recall:</strong> 0.97 (weighted average)</li>
+                                <li><strong>F1-score:</strong> 0.97 (weighted average)</li>
+                            </ul>
+                            <canvas id="modelEvaluationCanvas" width="400" height="300" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-4 animate-on-scroll">Habitat Suitability Classification</h2>
+                    <p class="animate-on-scroll">The final output of our model is a classification of each 30-meter pixel in the study area into one of three habitat suitability classes:</p>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">High Suitability</h5>
+                            <p class="card-text">Areas with optimal conditions for elk, characterized by:</p>
+                            <ul>
+                                <li>Moderate slopes (10-30°)</li>
+                                <li>Mid-elevation zones (2,000-3,000 meters)</li>
+                                <li>High vegetation density (NDVI > 0.6)</li>
+                                <li>Proximity to water sources (< 500 meters)</li>
+                                <li>Adequate distance from roads (> 300 meters)</li>
+                                <li>Edge habitat with forest/meadow interfaces</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Medium Suitability</h5>
+                            <p class="card-text">Areas with acceptable but not optimal conditions, characterized by:</p>
+                            <ul>
+                                <li>Steeper slopes (30-45°) or very flat areas (0-5°)</li>
+                                <li>Higher or lower elevations (outside optimal range)</li>
+                                <li>Moderate vegetation density (NDVI 0.4-0.6)</li>
+                                <li>Intermediate distance from water (500-1000 meters)</li>
+                                <li>Moderate distance from roads (100-300 meters)</li>
+                                <li>Less distinct edge habitat characteristics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">Low Suitability</h5>
+                            <p class="card-text">Areas with poor conditions for elk, characterized by:</p>
+                            <ul>
+                                <li>Very steep slopes (>45°)</li>
+                                <li>Extreme elevations (very high or very low)</li>
+                                <li>Sparse vegetation (NDVI < 0.4)</li>
+                                <li>Far from water sources (> 1000 meters)</li>
+                                <li>Close to roads (< 100 meters)</li>
+                                <li>Lack of cover or forage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mt-5 mb-4 animate-on-scroll">Implementation Process</h2>
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Technical Implementation</h5>
+                            <p>The habitat prediction system was implemented using the following technical workflow:</p>
+                            <ol>
+                                <li><strong>Data Acquisition:</strong> All geospatial datasets were acquired from their respective sources and imported into a PostgreSQL/PostGIS database.</li>
+                                <li><strong>Preprocessing:</strong> Python scripts using GDAL, OGR, and NumPy libraries performed coordinate transformation, resampling, and data normalization.</li>
+                                <li><strong>Feature Calculation:</strong> ArcPy and custom Python scripts calculated derived features such as terrain metrics and distance rasters.</li>
+                                <li><strong>Model Training:</strong> Scikit-learn library in Python implemented the Random Forest Classifier with hyperparameter optimization.</li>
+                                <li><strong>Classification:</strong> The trained model was applied to the entire study area to generate habitat suitability maps.</li>
+                                <li><strong>Validation:</strong> Accuracy assessment using the test dataset and field verification at 50 random locations.</li>
+                                <li><strong>Web Visualization:</strong> Results were converted to web-compatible formats and integrated into this interactive application.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4 animate-on-scroll">Code Overview</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Core Python Code Snippets</h5>
+                            <p>The following code snippets illustrate key components of the implementation:</p>
+                            
+                            <h6 class="mt-4">Feature Engineering</h6>
+                            <pre class="bg-light p-3 rounded">
+# Calculate terrain features
+dem = rasterio.open('elevation.tif')
+elevation = dem.read(1)
+
+# Calculate slope
+slope = calc_slope(elevation, dem.transform)
+
+# Calculate aspect
+aspect = calc_aspect(elevation, dem.transform)
+
+# Calculate terrain ruggedness index
+tri = calc_tri(elevation)
+
+# Categorize features
+elevation_cat = categorize_by_quintile(elevation)
+slope_cat = np.select(
+    [slope < 10, (slope >= 10) & (slope < 30), slope >= 30],
+    [0, 1, 2]  # Flat, Moderate, Steep
+)
+                            </pre>
+                            
+                            <h6 class="mt-4">Random Forest Model</h6>
+                            <pre class="bg-light p-3 rounded">
+# Train Random Forest model
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    features, habitat_scores, test_size=0.3, random_state=42, stratify=habitat_classes
+)
+
+# Set up hyperparameter grid
+param_grid = {
+    'n_estimators': [50, 100, 150],
+    'max_depth': [None, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+
+# Optimize hyperparameters
+grid_search = GridSearchCV(
+    RandomForestClassifier(random_state=42),
+    param_grid,
+    cv=5,
+    scoring='accuracy',
+    n_jobs=-1
+)
+
+grid_search.fit(X_train, y_train)
+best_model = grid_search.best_estimator_
+                            </pre>
+                            
+                            <h6 class="mt-4">Prediction and Assessment</h6>
+                            <pre class="bg-light p-3 rounded">
+# Generate predictions
+predictions = best_model.predict(X_test)
+probabilities = best_model.predict_proba(X_test)
+
+# Assess accuracy
+from sklearn.metrics import classification_report, confusion_matrix
+
+print(classification_report(y_test, predictions))
+print(confusion_matrix(y_test, predictions))
+
+# Get feature importance
+importance = best_model.feature_importances_
+indices = np.argsort(importance)[::-1]
+
+print("Feature ranking:")
+for i in range(len(feature_names)):
+    print(f"{i+1}. {feature_names[indices[i]]} ({importance[indices[i]] * 100:.1f}%)")
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4 animate-on-scroll">Technical Resources</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Resources</h5>
+                            <p>All geospatial data used in this project is publicly available from the following sources:</p>
+                            <ul class="text-start">
+                                <li>USGS National Map</li>
+                                <li>Copernicus Open Access Hub</li>
+                                <li>Colorado Parks & Wildlife Data Portal</li>
+                                <li>OpenStreetMap</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-2">Access Data Sources</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Code Repository</h5>
+                            <p>The full codebase for this project is available on GitHub, including:</p>
+                            <ul class="text-start">
+                                <li>Data preprocessing scripts</li>
+                                <li>Feature engineering notebooks</li>
+                                <li>Machine learning model implementation</li>
+                                <li>Map generation utilities</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-2">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Documentation</h5>
+                            <p>Comprehensive documentation is available for:</p>
+                            <ul class="text-start">
+                                <li>Methodology details</li>
+                                <li>Data dictionaries</li>
+                                <li>Parameter selection rationale</li>
+                                <li>Model validation approaches</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-2">Download Documentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white">
+        <div class="container text-center">
+            <p>Elk Habitat Prediction System &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/image-generator.js"></script>
+    <script src="js/methodology-diagrams.js"></script>
+    <script src="js/site-integration.js"></script>
+</body>
+</html>

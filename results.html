@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | Elk Habitat Prediction System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/master-styles.css">
+    <style>
+        .results-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Elk Habitat Prediction</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="methodology.html">Methodology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="results.html">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="interactive-map.html">Interactive Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="research-paper.html">Research Paper</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="results-header">
+        <div class="container">
+            <h1 class="animate-on-scroll">Results</h1>
+            <p class="lead animate-on-scroll">Key findings and insights from the Elk Habitat Prediction System</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="mb-4 animate-on-scroll">Model Performance</h2>
+                    <p class="animate-on-scroll">The Random Forest Classifier achieved exceptional predictive performance on the elk habitat suitability classification task. On the test dataset (30% of the total data), the model attained an overall accuracy of 97.1%, demonstrating its effectiveness for this application.</p>
+                    
+                    <div class="table-responsive mt-4 mb-5 animate-on-scroll">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th>Support</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Low</td>
+                                    <td>0.98</td>
+                                    <td>0.98</td>
+                                    <td>0.98</td>
+                                    <td>22,500</td>
+                                </tr>
+                                <tr>
+                                    <td>Medium</td>
+                                    <td>0.96</td>
+                                    <td>0.97</td>
+                                    <td>0.96</td>
+                                    <td>30,000</td>
+                                </tr>
+                                <tr>
+                                    <td>High</td>
+                                    <td>0.98</td>
+                                    <td>0.97</td>
+                                    <td>0.97</td>
+                                    <td>22,500</td>
+                                </tr>
+                                <tr class="table-secondary">
+                                    <td><strong>Weighted Avg</strong></td>
+                                    <td><strong>0.97</strong></td>
+                                    <td><strong>0.97</strong></td>
+                                    <td><strong>0.97</strong></td>
+                                    <td><strong>75,000</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p class="animate-on-scroll">The high precision and recall values across all three habitat suitability classes indicate that the model performs consistently well for each category. The slightly lower performance for the Medium class likely reflects the inherent ambiguity in distinguishing between moderate habitat quality and the more extreme categories.</p>
+                    
+                    <div class="card mb-5 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Cross-Validation Results</h5>
+                            <p>To ensure the robustness of our model, we performed 5-fold cross-validation, which yielded the following results:</p>
+                            <canvas id="crossValidationChart" width="700" height="300" class="mt-3 mx-auto d-block"></canvas>
+                            <p class="text-center mt-3"><small>Cross-validation accuracy across 5 folds, with 95% confidence interval</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 animate-on-scroll">Feature Importance Analysis</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="chart-container animate-on-scroll">
+                        <canvas id="featureImportanceChart" width="500" height="400"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <p class="animate-on-scroll">The analysis identified terrain slope as the most influential predictor, accounting for 40.8% of the model's predictive power. This finding aligns with ecological understanding of elk behavior, as these animals typically prefer moderate slopes that provide a balance between accessibility and security.</p>
+                    
+                    <p class="animate-on-scroll">Vegetation density, measured by the Normalized Difference Vegetation Index (NDVI), emerged as the second most important feature (13.7%), highlighting the significance of forage availability and cover in elk habitat selection.</p>
+                    
+                    <p class="animate-on-scroll">Elevation ranked third in importance (12.3%), reflecting elk's preference for certain elevation ranges that offer optimal environmental conditions.</p>
+                    
+                    <p class="animate-on-scroll">Other notable contributors included elevation category (6.2%), edge proximity (5.8%), and vegetation moisture content measured by NDMI (4.4%). Distance features (proximity to roads, water, and access points) each contributed between 1.7-1.9% to the model's predictive power.</p>
+                    
+                    <div class="card mt-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Feature Importance by Category</h5>
+                            <canvas id="categoryImportanceChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="mb-4 animate-on-scroll">Spatial Distribution of Habitat Suitability</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <canvas id="gmu12Map" class="card-img-top" width="400" height="300"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title">GMU 12 - Bears Ears</h5>
+                            <p class="card-text">This northern unit shows a distinct pattern of high suitability areas along mid-elevation slopes with good vegetation cover. Low suitability areas are concentrated in steep terrain and areas close to major roads.</p>
+                            <p><strong>High Suitability:</strong> 32% of area</p>
+                            <p><strong>Medium Suitability:</strong> 41% of area</p>
+                            <p><strong>Low Suitability:</strong> 27% of area</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <canvas id="gmu23Map" class="card-img-top" width="400" height="300"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title">GMU 23 - Rabbit Ears</h5>
+                            <p class="card-text">This central unit features extensive high suitability habitat in areas with moderate slopes and abundant vegetation. Water features create corridors of high suitability throughout the unit.</p>
+                            <p><strong>High Suitability:</strong> 38% of area</p>
+                            <p><strong>Medium Suitability:</strong> 37% of area</p>
+                            <p><strong>Low Suitability:</strong> 25% of area</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <canvas id="gmu24Map" class="card-img-top" width="400" height="300"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title">GMU 24 - Gore Range</h5>
+                            <p class="card-text">This southern unit has more varied terrain, resulting in a patchwork of habitat suitability. High suitability areas are concentrated in sheltered valleys with good vegetation and water access.</p>
+                            <p><strong>High Suitability:</strong> 28% of area</p>
+                            <p><strong>Medium Suitability:</strong> 42% of area</p>
+                            <p><strong>Low Suitability:</strong> 30% of area</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-8 mx-auto">
+                    <p class="animate-on-scroll">The application of the trained model to the entire study area produced comprehensive habitat suitability maps for GMUs 12, 23, and 24. These maps reveal distinct spatial patterns in predicted elk habitat quality across the landscape.</p>
+                    
+                    <h4 class="mt-4 animate-on-scroll">High Suitability Areas</h4>
+                    <p class="animate-on-scroll">High suitability areas were predominantly found in mid-elevation zones (2,000-3,000 meters) with moderate slopes (10-30°) and substantial vegetation cover (NDVI values > 0.6). These areas typically featured a mosaic of forest and open meadows, creating the edge habitats that elk prefer for both forage and security.</p>
+                    
+                    <h4 class="mt-4 animate-on-scroll">Medium Suitability Areas</h4>
+                    <p class="animate-on-scroll">Medium suitability areas generally occurred in transitional zones between high and low suitability regions, often characterized by either steeper slopes, less optimal vegetation density, or greater proximity to human disturbance factors such as roads.</p>
+                    
+                    <h4 class="mt-4 animate-on-scroll">Low Suitability Areas</h4>
+                    <p class="animate-on-scroll">Low suitability areas were primarily associated with very steep terrain (slopes > 30°), extremely high elevations with limited vegetation, areas very close to roads and human access points, or regions with minimal vegetation cover.</p>
+                    
+                    <div class="card mt-4 mb-4 animate-on-scroll">
+                        <div class="card-body">
+                            <h5 class="card-title">Probability Distribution Analysis</h5>
+                            <p>The probability distribution analysis reveals the confidence level of our model's predictions across the study area:</p>
+                            <canvas id="probabilityDistributionChart" width="700" height="300" class="mt-3 mx-auto d-block"></canvas>
+                            <p class="text-center mt-3"><small>Distribution of prediction probabilities for each habitat suitability class</small></p>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-4 animate-on-scroll">The probability distribution analysis revealed that approximately 32% of the study area was classified as high suitability, 40% as medium suitability, and 28% as low suitability. This distribution was intentionally calibrated during the habitat score calculation to ensure balanced representation of each class while maintaining ecological validity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4 text-center animate-on-scroll">Practical Applications</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">For Hunters</h3>
+                            <p class="card-text">Our habitat suitability maps provide valuable guidance for planning hunting expeditions:</p>
+                            <ul>
+                                <li>Identify high-probability areas to focus scouting efforts</li>
+                                <li>Understand terrain features that influence elk distribution</li>
+                                <li>Plan access routes that minimize disturbance</li>
+                                <li>Anticipate elk movement patterns based on habitat connectivity</li>
+                                <li>Optimize time in the field by targeting the most promising locations</li>
+                            </ul>
+                            <p class="card-text mt-3">The interactive map allows hunters to explore specific areas of interest and plan their approach based on detailed habitat information.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">For Wildlife Managers</h3>
+                            <p class="card-text">Our results offer valuable insights for conservation and management:</p>
+                            <ul>
+                                <li>Identify critical habitat areas for protection and enhancement</li>
+                                <li>Guide land acquisition and conservation easement priorities</li>
+                                <li>Inform habitat improvement projects to maximize impact</li>
+                                <li>Develop more targeted harvest strategies based on habitat distribution</li>
+                                <li>Monitor potential impacts of development and recreation</li>
+                                <li>Anticipate shifts in habitat suitability due to climate change</li>
+                            </ul>
+                            <p class="card-text mt-3">These data-driven insights can help optimize resource allocation and enhance the effectiveness of wildlife management efforts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4 animate-on-scroll">Explore Our Results in Detail</h2>
+            <p class="lead mb-5 animate-on-scroll">Dive deeper into our findings with our interactive tools and comprehensive research paper.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6 mb-4">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Interactive Map</h3>
+                            <p class="card-text">Explore our habitat suitability predictions across all three GMUs with our interactive mapping tool. Toggle different layers, select specific areas, and plan your next hunting trip with data-driven insights.</p>
+                            <a href="interactive-map.html" class="btn btn-primary mt-3">Explore Map</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card animate-on-scroll">
+                        <div class="card-body">
+                            <h3 class="card-title">Research Paper</h3>
+                            <p class="card-text">Read our complete research paper for an in-depth analysis of our methodology, results, and conclusions. Includes comprehensive literature review and detailed statistical analysis.</p>
+                            <a href="research-paper.html" class="btn btn-primary mt-3">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white">
+        <div class="container text-center">
+            <p>Elk Habitat Prediction System &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/image-generator.js"></script>
+    <script src="js/site-integration.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize header background
+            const resultsHeader = document.querySelector('.results-header');
+            if (resultsHeader && typeof createElkHeroImage === 'function') {
+                const headerImage = createElkHeroImage();
+                resultsHeader.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${headerImage}')`;
+            }
+            
+            // Initialize feature importance chart
+            if (typeof createFeatureImportanceChart === 'function') {
+                const chartCanvas = document.getElementById('featureImportanceChart');
+                if (chartCanvas) {
+                    const chartImg = createFeatureImportanceChart();
+                    const ctx = chartCanvas.getContext('2d');
+                    const img = new Image();
+                    img.onload = function() {
+                        ctx.drawImage(img, 0, 0, chartCanvas.width, chartCanvas.height);
+                    };
+                    img.src = chartImg;
+                }
+            }
+            
+            // Generate GMU maps
+            if (typeof createHabitatMap === 'function') {
+                const maps = [
+                    { id: 'gmu12Map', gmu: 12 },
+                    { id: 'gmu23Map', gmu: 23 },
+                    { id: 'gmu24Map', gmu: 24 }
+                ];
+                
+                maps.forEach(map => {
+                    const canvas = document.getElementById(map.id);
+                    if (canvas) {
+                        const mapImg = createHabitatMap(map.gmu);
+                        const ctx = canvas.getContext('2d');
+                        const img = new Image();
+                        img.onload = function() {
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        };
+                        img.src = mapImg;
+                    }
+                });
+            }
+            
+            // Create additional charts
+            // Cross-validation chart
+            const crossValidationCanvas = document.getElementById('crossValidationChart');
+            if (crossValidationCanvas && typeof drawCrossValidationChart === 'function') {
+                const ctx = crossValidationCanvas.getContext('2d');
+                drawCrossValidationChart(ctx, crossValidationCanvas.width, crossValidationCanvas.height);
+            }
+            
+            // Category importance chart
+            const categoryImportanceCanvas = document.getElementById('categoryImportanceChart');
+            if (categoryImportanceCanvas && typeof drawCategoryImportanceChart === 'function') {
+                const ctx = categoryImportanceCanvas.getContext('2d');
+                drawCategoryImportanceChart(ctx, categoryImportanceCanvas.width, categoryImportanceCanvas.height);
+            }
+            
+            // Probability distribution chart
+            const probabilityDistributionCanvas = document.getElementById('probabilityDistributionChart');
+            if (probabilityDistributionCanvas && typeof drawProbabilityDistributionChart === 'function') {
+                const ctx = probabilityDistributionCanvas.getContext('2d');
+                drawProbabilityDistributionChart(ctx, probabilityDistributionCanvas.width, probabilityDistributionCanvas.height);
+            }
+        });
+    </script>
+</body>
+</html>

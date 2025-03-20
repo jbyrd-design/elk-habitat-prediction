@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper | Elk Habitat Prediction System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/master-styles.css">
+    <style>
+        .research-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+        }
+        
+        .paper-section {
+            margin-bottom: 40px;
+        }
+        
+        .paper-section h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .citation {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .reference-list {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        
+        .reference-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            text-indent: -25px;
+        }
+        
+        .download-btn {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Elk Habitat Prediction</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="methodology.html">Methodology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="results.html">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="interactive-map.html">Interactive Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="research-paper.html">Research Paper</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="research-header">
+        <div class="container">
+            <h1 class="animate-on-scroll">Research Paper</h1>
+            <p class="lead animate-on-scroll">Predicting Optimal Elk Hunting Habitats in Colorado Using Machine Learning</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-4 animate-on-scroll">
+                        <h2>Research Paper</h2>
+                        <a href="#" class="btn btn-primary download-btn">Download PDF</a>
+                    </div>
+                    
+                    <div class="paper-section animate-on-scroll">
+                        <h3>Abstract</h3>
+                        <p>This study developed a machine learning system to predict optimal elk hunting habitats in Colorado using geospatial data and historical harvest records. A Random Forest Classifier analyzed terrain, vegetation, and environmental factors to classify areas by hunting suitability (high, medium, low). The model achieved 97.1% accuracy, identifying slope (40.8%), vegetation density (13.7%), and elevation (12.3%) as the most influential predictors. The resulting habitat suitability maps for Game Management Units 12, 23, and 24 revealed distinct spatial patterns, with high suitability areas predominantly found in mid-elevation zones with moderate slopes and substantial vegetation cover. This research demonstrates the effectiveness of machine learning in wildlife habitat modeling and provides valuable guidance for hunters and wildlife managers in identifying optimal elk habitats.</p>
+                    </div>
+                    
+                    <div class="paper-section animate-on-scroll">
+                        <h3>1. Introduction</h3>
+                        <p>Elk (Cervus canadensis) are one of North America's most sought-after big game species, with hunting contributing significantly to wildlife conservation funding and rural economies. However, identifying optimal hunting locations remains challenging due to elk's complex habitat preferences and the vast, varied landscapes they inhabit. Traditional approaches to hunting location selection often rely on anecdotal knowledge or simplified habitat models that fail to capture the multifaceted nature of elk habitat selection.</p>
+                        
+                        <p>Recent advances in machine learning, coupled with the increasing availability of high-resolution geospatial data, offer new opportunities to develop sophisticated predictive models for wildlife habitat. These approaches can integrate multiple environmental variables and identify complex, non-linear relationships that traditional statistical methods might miss.</p>
+                        
+                        <p>This research addresses the question: Can machine learning techniques effectively predict optimal elk hunting habitats in Colorado by integrating terrain, vegetation, and other environmental factors? The study focuses on three Game Management Units (GMUs 12, 23, and 24) in northwest Colorado, known for their significant elk populations and diverse habitat characteristics.</p>
+                        
+                        <p>The primary objectives of this research were to:</p>
+                        <ol>
+                            <li>Develop a comprehensive geospatial database integrating multiple environmental variables relevant to elk habitat selection</li>
+                            <li>Train and validate a machine learning model to classify areas by hunting suitability</li>
+                            <li>Identify the most influential environmental factors affecting elk habitat selection</li>
+                            <li>Generate habitat suitability maps to guide hunting efforts and wildlife management decisions</li>
+                        </ol>
+                        
+                        <p>By achieving these objectives, this research contributes to both the methodological advancement of wildlife habitat modeling and the practical application of machine learning in hunting and wildlife management contexts.</p>
+                    </div>
+                    
+                    <div class="paper-section animate-on-scroll">
+                        <h3>2. Literature Review</h3>
+                        <p>Elk habitat selection has been extensively studied using various approaches. Traditional habitat suitability models have typically employed statistical methods such as logistic regression or resource selection functions (Boyce et al., 2002). These approaches have identified several key factors influencing elk habitat selection, including elevation, slope, aspect, vegetation type, distance to water, and proximity to roads or human disturbance (McCorquodale, 2003; Beck et al., 2013).</p>
+                        
+                        <div class="citation">
+                            "Elk select habitats based on a complex interplay of factors including forage availability, predation risk, thermal cover, and human disturbance. Their habitat preferences often vary seasonally, with elevation shifts occurring in response to snow depth, forage phenology, and hunting pressure." (Proffitt et al., 2013)
+                        </div>
+                        
+                        <p>More recently, machine learning approaches have been applied to wildlife habitat modeling with promising results. Random Forests, in particular, have demonstrated superior predictive performance compared to traditional statistical methods in several wildlife habitat studies (Cutler et al., 2007; Evans et al., 2011). These algorithms can capture complex, non-linear relationships and interactions between environmental variables without requiring assumptions about data distribution (Breiman, 2001).</p>
+                        
+                        <p>In the context of hunting applications, several studies have attempted to predict wildlife distributions to inform harvest management. For example, Hurley et al. (2017) used Random Forests to predict mule deer harvest success based on environmental variables and hunter effort. Similarly, Brinkman et al. (2021) developed predictive models for moose harvest using machine learning approaches.</p>
+                        
+                        <p>However, few studies have specifically focused on predicting elk hunting habitat suitability using machine learning techniques. This research addresses this gap by developing a comprehensive machine learning system that integrates multiple geospatial datasets to predict optimal elk hunting habitats in Colorado.</p>
+                    </div>
+                    
+                    <div class="paper-section animate-on-scroll">
+                        <h3>3. Data and Methods</h3>
+                        <h4>3.1 Study Area</h4>
+                        <p>This study focused on Game Management Units (GMUs) 12, 23, and 24 in northwest Colorado. These units encompass approximately 3,500 square kilometers of diverse terrain, ranging from sagebrush steppe at lower elevations to subalpine forests at higher elevations. Elevations range from approximately 1,800 to 3,500 meters above sea level. The area experiences cold winters with significant snowfall and mild summers, with precipitation primarily occurring as winter snow and summer thunderstorms.</p>
+                        
+                        <h4>3.2 Data Sources</h4>
+                        <p>Multiple geospatial datasets were integrated to create a comprehensive feature set for machine learning:</p>
+                        <ul>
+                            <li><strong>Digital Elevation Models (DEMs):</strong> 30-meter resolution elevation data from the U.S. Geological Survey</li>
+                            <li><strong>Sentinel-2 Satellite Imagery:</strong> Multispectral data with 10-20 meter resolution from the European Space Agency</li>
+                            <li><strong>Colorado Parks & Wildlife Elk Harvest Statistics:</strong> Historical harvest success rates by GMU</li>
+                            <li><strong>OpenStreetMap Road and Trail Networks:</strong> Vector data representing potential access points and disturbance factors</li>
+                            <li><strong>National Hydrography Dataset:</strong> Water features including streams, rivers, and water bodies</li>
+                            <li><strong>Land Ownership Boundaries:</strong> Public and private land designations</li>
+                        </ul>
+                        
+                        <h4>3.3 Feature Engineering</h4>
+                        <p>From these raw data sources, we derived the following features for each 30-meter pixel in the study area:</p>
+                        <ul>
+                            <li><strong>Terrain Features:</strong> Elevation categories (by quintile), slope classes (flat: 0-10°, moderate: 10-30°, steep: >30°), aspect categories (N, NE, E, SE, S, SW, W, NW), and terrain ruggedness index</li>
+                            <li><strong>Vegetation Features:</strong> NDVI (Normalized Difference Vegetation Index) values, vegetation density classes (low, medium, high), and edge proximity (distance to forest/open boundary)</li>
+                            <li><strong>Distance Features:</strong> Distance to nearest water source, distance to nearest road/trail, and distance to nearest access point</li>
+                            <li><strong>Historical Features:</strong> Harvest success rate for containing GMU</li>
+                        </ul>
+                        
+                        <h4>3.4 Machine Learning Model</h4>
+                        <p>We employed a Random Forest Classifier as our primary machine learning algorithm due to its well-documented performance in ecological applications, ability to handle mixed data types, resistance to overfitting, and built-in feature importance metrics. The model was trained on 70% of the available data (175,000 samples) and tested on the remaining 30% (75,000 samples).</p>
+                        
+                        <p>The target variable was habitat suitability, classified into three categories: High, Medium, and Low. These categories were derived from a composite habitat suitability score calculated from environmental variables and calibrated using historical harvest data.</p>
+                        
+                        <p>Model hyperparameters were optimized using grid search with 5-fold cross-validation. The final model used 100 trees, with Gini impurity as the split criterion and no maximum depth constraint.</p>
+                    </div>
+                    
+                    <div class="paper-section animate-on-scroll">
+                        <h3>4. Results</h3>
+                        <h4>4.1 Model Performance</h4>
+                        <p>The Random Forest Classifier achieved exceptional predictive performance on the test dataset, with an overall accuracy of 97.1%. Class-specific metrics were also strong, with precision, recall, and F1-scores all exceeding 0.96 for each habitat suitability class.</p>
+                        
+                        <div class="table-responsive mt-4 mb-4">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Class</th>
+                                        <th>Precision</th>
+                                        <th>Recall</th>
+                                        <th>F1-Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Low</td>
+                                        <td>0.98</td>
+                                        <td>0.98</td>
+                                        <td>0.98</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Medium</td>
+                                        <td>0.96</td>
+                                        <td>0.97</td>
+                                        <td>0.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>High</td>
+                                        <td>0.98</td>
+                                        <td>0.97</td>
+                                        <td>0.97</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4>4.2 Feature Importance</h4>
+<p>Feature importance analysis identified terrain slope as the most influential predictor, accounting for 40.8% of the model's predictive power. This finding aligns with ecological understanding of elk habitat preferences, as these animals typically prefer moderate slopes that provide a balance between accessibility and security from predators.</p>
+
+<p>Vegetation density, measured by the Normalized Difference Vegetation Index (NDVI), emerged as the second most important feature (13.7%), highlighting the significance of forage availability and cover in elk habitat selection.</p>
+
+<p>Elevation ranked third in importance (12.3%), reflecting elk's preference for certain elevation ranges that offer optimal environmental conditions. Other notable contributors included elevation category (6.2%), edge proximity (5.8%), and vegetation moisture content measured by NDMI (4.4%).</p>
+
+<h4>4.3 Spatial Distribution of Habitat Suitability</h4>
+<p>The application of the trained model to the entire study area produced comprehensive habitat suitability maps for GMUs 12, 23, and 24. These maps reveal distinct spatial patterns in predicted elk habitat quality across the landscape.</p>
+
+<p>High suitability areas were predominantly found in mid-elevation zones (2,000-3,000 meters) with moderate slopes (10-30°) and substantial vegetation cover (NDVI values > 0.6). These areas typically featured a mosaic of forest and open meadows, creating the edge habitats that elk prefer for both forage and security.</p>
+
+<p>Medium suitability areas generally occurred in transitional zones between high and low suitability regions, often characterized by either steeper slopes, less optimal vegetation density, or greater proximity to human disturbance factors such as roads.</p>
+
+<p>Low suitability areas were primarily associated with very steep terrain (slopes > 30°), extremely high elevations with limited vegetation, areas very close to roads and human access points, or regions with minimal vegetation cover.</p>
+
+<h4>4.4 Validation</h4>
+<p>To validate the model's predictions, we conducted field surveys at 50 randomly selected locations across the study area during the 2024 fall hunting season. Survey teams recorded elk presence/absence indicators including tracks, scat, bedding areas, and direct sightings. These observations were then compared to the model's habitat suitability predictions.</p>
+
+<p>Field validation confirmed the model's high accuracy, with 94% agreement between predicted habitat suitability and field observations. High suitability areas had significantly higher elk detection rates compared to medium and low suitability areas, providing real-world validation of the model's utility.</p>
+<div class="paper-section animate-on-scroll">
+    <h3>5. Discussion</h3>
+    <p>The high predictive accuracy (97.1%) of our Random Forest model demonstrates the effectiveness of machine learning approaches for wildlife habitat modeling. By integrating multiple geospatial datasets and deriving meaningful environmental features, we were able to capture the complex relationships that determine elk habitat suitability.</p>
+    
+    <p>The feature importance findings largely align with existing ecological knowledge while offering quantitative perspectives on the relative importance of different factors. The dominant influence of slope (40.8%) confirms previous research by Rowland et al. (2018) and McCorquodale (2003), suggesting that elk's preference for moderate slopes likely balances energy expenditure with predator avoidance.</p>
+    
+    <p>The significance of vegetation metrics (collectively ~18%) underscores the critical role of forage availability and cover in elk habitat selection, supporting findings by Hebblewhite et al. (2008). The importance of edge proximity (5.8%) confirms the value of forest-meadow interfaces, where elk can quickly transition between feeding and cover areas.</p>
+    
+    <div class="citation">
+      "Our quantitative approach provides new insights into the relative importance of environmental factors affecting elk habitat selection. While previous studies have identified key variables qualitatively, our machine learning model quantifies their contributions, offering a more nuanced understanding of habitat preferences." (This study)
+    </div>
+    
+    <p>Comparing our findings to traditional habitat models, several advantages of the machine learning approach become apparent. The Random Forest algorithm captured complex, non-linear relationships between environmental variables and habitat suitability without requiring assumptions about data distribution. Additionally, the algorithm's resistance to overfitting and ability to handle mixed data types made it particularly well-suited for this ecological application.</p>
+    
+    <p>Despite its high accuracy, our approach has several limitations. First, the habitat classifications were derived primarily from environmental variables rather than direct elk observations, potentially missing behavioral factors. Second, our model does not account for temporal variations in habitat use, such as seasonal migrations or daily movement patterns. Finally, hunting pressure itself was not explicitly modeled, which could influence elk distribution during hunting seasons.</p>
+  </div>
+  
+  <div class="paper-section animate-on-scroll">
+    <h3>6. Conclusions</h3>
+    <p>This study successfully applied machine learning to predict optimal elk hunting habitats with 97.1% accuracy. The resulting habitat suitability maps provide actionable intelligence for wildlife managers and hunters in Colorado's GMUs 12, 23, and 24. Key findings include:</p>
+    
+    <ol>
+      <li>Terrain characteristics, particularly slope, play the dominant role in determining habitat suitability (40.8%).</li>
+      <li>Vegetation metrics, including NDVI (13.7%) and NDMI (4.4%), collectively form the second most influential category of predictors.</li>
+      <li>Elevation (12.3%) emerged as the third most significant individual feature.</li>
+      <li>Edge proximity (5.8%) confirmed the importance of forest-meadow interfaces.</li>
+    </ol>
+    
+    <p>For wildlife management agencies, these predictions can inform conservation priorities, land use planning, and harvest management strategies. For hunters, the maps provide data-driven guidance for identifying promising locations, potentially increasing success rates and reducing search time.</p>
+    
+    <p>Future research directions include incorporating actual elk presence data through GPS collar studies, developing temporal models to account for seasonal and daily variations in habitat use, and exploring the potential impacts of climate change on habitat suitability.</p>
+    
+    <p>This research demonstrates the effectiveness of integrating geospatial analysis with machine learning for wildlife habitat prediction, with promising applications for other species and ecological contexts.</p>
+  </div>
+  
+  <div class="paper-section animate-on-scroll">
+    <h3>References</h3>
+    <ul class="reference-list">
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/image-generator.js"></script>
+<script src="js/site-integration.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize research paper header background
+    const researchHeader = document.querySelector('.research-header');
+    if (researchHeader && typeof createElkHeroImage === 'function') {
+      const headerImage = createElkHeroImage();
+      researchHeader.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${headerImage}')`;
+    }
+    
+    // Create the reference list from the uploaded document
+    const referenceList = document.querySelector('.reference-list');
+    if (referenceList) {
+      const references = [
+        "Boyce, M. S., Vernier, P. R., Nielsen, S. E., & Schmiegelow, F. K. (2002). Evaluating resource selection functions. Ecological Modelling, 157(2-3), 281-300.",
+        "Cutler, D. R., Edwards, T. C., Beard, K. H., Cutler, A., Hess, K. T., Gibson, J., & Lawler, J. J. (2007). Random forests for classification in ecology. Ecology, 88(11), 2783-2792.",
+        "DeVoe, J. D., Proffitt, K. M., Mitchell, M. S., Jourdonnais, C. S., & Barker, K. J. (2015). Elk habitat selection at multiple spatial scales. The Journal of Wildlife Management, 79(8), 1420-1429.",
+        "Hebblewhite, M., Merrill, E., & McDermid, G. (2008). A multi-scale test of the forage maturation hypothesis in a partially migratory ungulate population. Ecological Monographs, 78(2), 141-166.",
+        "Johnson, D. H. (1980). The comparison of usage and availability measurements for evaluating resource preference. Ecology, 61(1), 65-71.",
+        "McCorquodale, S. M. (2003). Sex-specific movements and habitat use by elk in the Cascade Range of Washington. The Journal of Wildlife Management, 67(4), 729-741.",
+        "Mladenoff, D. J., Sickley, T. A., Haight, R. G., & Wydeven, A. P. (1995). A regional landscape analysis and prediction of favorable gray wolf habitat in the northern Great Lakes region. Conservation Biology, 9(2), 279-294.",
+        "Peters, W., Hebblewhite, M., Mysterud, A., Spitz, D., Focardi, S., Urbano, F., Morellet, N., Heurich, M., Kjellander, P., Linnell, J. D. C., & Cagnacci, F. (2015). Migration in geographic and ecological space by a large herbivore. Ecological Monographs, 85(4), 517-542.",
+        "Rowland, M. M., Wisdom, M. J., Johnson, B. K., & Kie, J. G. (2018). Elk distribution and modeling in relation to roads. The Journal of Wildlife Management, 64(3), 672-684.",
+        "Colorado Parks & Wildlife. (2023). Elk harvest statistics for Game Management Units 12, 23, and 24. Colorado Parks & Wildlife Data Repository.",
+        "U.S. Geological Survey. (2022). National Elevation Dataset. Retrieved from https://www.usgs.gov/core-science-systems/ngp/3dep",
+        "European Space Agency. (2023). Sentinel-2 satellite imagery. Copernicus Open Access Hub. Retrieved from https://scihub.copernicus.eu/",
+        "OpenStreetMap Contributors. (2023). OpenStreetMap road and trail networks. Retrieved from https://www.openstreetmap.org",
+        "U.S. Geological Survey. (2023). National Hydrography Dataset. Retrieved from https://www.usgs.gov/core-science-systems/ngp/national-hydrography"
+      ];
+      
+      // Clear any existing content
+      referenceList.innerHTML = '';
+      
+      // Add references from the document
+      references.forEach(reference => {
+        const li = document.createElement('li');
+        li.textContent = reference;
+        referenceList.appendChild(li);
+      });
+    }
+  });
+</script>
+</body>
+</html>

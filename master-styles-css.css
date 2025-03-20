@@ -1,0 +1,420 @@
+/* Master CSS file for Elk Habitat Prediction System Website */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+/* Base Elements */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Hero Sections */
+.hero, .methodology-header, .results-header, .research-header, .map-header {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero {
+    padding: 120px 0;
+}
+
+.hero h1, .methodology-header h1, .results-header h1, .research-header h1, .map-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p, .methodology-header p, .results-header p, .research-header p, .map-header p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card ul {
+    padding-left: 1.2rem;
+}
+
+.card-img-top {
+    height: auto;
+    max-width: 100%;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-outline-primary {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-lg {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+}
+
+.navbar-dark .navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #fff;
+}
+
+/* Map Elements */
+.map-container {
+    height: 600px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    position: relative;
+}
+
+.map-container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.map-container canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.map-controls {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.map-controls:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.map-controls .form-check {
+    margin-bottom: 8px;
+}
+
+.legend {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.legend:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Chart Elements */
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.chart-container canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Research Paper Elements */
+.paper-section {
+    margin-bottom: 40px;
+}
+
+.paper-section h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.citation {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.reference-list {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.reference-list li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    text-indent: -25px;
+    font-size: 0.9rem;
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Styling */
+section {
+    padding: 60px 0;
+}
+
+section.bg-light {
+    background-color: #f8f9fa;
+}
+
+/* Table Styling */
+.table {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-dark th {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+.table-bordered {
+    border: none;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+/* Footer */
+footer {
+    margin-top: 0;
+    padding: 20px 0;
+}
+
+/* Badge Styling */
+.badge {
+    padding: 6px 10px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+/* Code Blocks */
+pre {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+code {
+    color: #e74c3c;
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero h1, .methodology-header h1, .results-header h1, .research-header h1, .map-header h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero h1, .methodology-header h1, .results-header h1, .research-header h1, .map-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p, .methodology-header p, .results-header p, .research-header p, .map-header p {
+        font-size: 1.3rem;
+    }
+    
+    .chart-container {
+        height: 350px;
+    }
+    
+    section {
+        padding: 50px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero, .methodology-header, .results-header, .research-header, .map-header {
+        padding: 60px 0;
+    }
+    
+    .hero h1, .methodology-header h1, .results-header h1, .research-header h1, .map-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p, .methodology-header p, .results-header p, .research-header p, .map-header p {
+        font-size: 1.2rem;
+    }
+    
+    .map-container {
+        height: 400px;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1, .methodology-header h1, .results-header h1, .research-header h1, .map-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p, .methodology-header p, .results-header p, .research-header p, .map-header p {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 8px 20px;
+    }
+    
+    .map-container {
+        height: 300px;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+}
